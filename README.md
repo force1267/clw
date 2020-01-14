@@ -368,7 +368,7 @@ int main() {
 }
 ``` -->
 
-## TODO
+## TODOs
 
 1. `Lua::Table` // use lua tables as cpp Iterators
 2. `Lua::Library` // use cpp functions in lua as libs
