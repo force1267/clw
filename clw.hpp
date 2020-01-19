@@ -85,7 +85,7 @@ private:
         friend class Function;
     };
 
-    const int run(const char* dotlua);
+    int run(const char* dotlua);
 
 public:
     class Function {
