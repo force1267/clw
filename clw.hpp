@@ -145,6 +145,7 @@ public:
     Lua(const Lua&);
     Lua(vm);
     Lua(const char * dotlua);
+    Lua(std::string& dotlua);
     ~Lua();
 
     bool operator()(std::string& dotlua);

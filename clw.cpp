@@ -127,6 +127,9 @@ Lua::Lua(Lua::vm L): L(L), owner(false) {
 Lua::Lua(const char * dotlua): Lua() {
     run(dotlua);
 }
+Lua::Lua(std::string& dotlua): Lua() {
+    run(dotlua);
+}
 Lua::~Lua() {
     if(owner) {
         lua_close(L);
