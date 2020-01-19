@@ -61,7 +61,10 @@ void Lua::variable_t::operator>>(Lua::CFunction& v) const { lua_getglobal(instan
 void Lua::variable_t::operator>>(Lua::Function& v)  const { lua_getglobal(instance.L, variable_name); v.instance = &instance; }
 
 
-const int Lua::run(const char* dotlua) {
+int Lua::run(std::string& dotlua) {
+    return run(dotlua.c_str());
+}
+int Lua::run(const char* dotlua) {
     int err = luaL_dofile(L, dotlua);
     if(err) {
         error = err;
@@ -130,6 +133,7 @@ Lua::~Lua() {
     }
 }
 
+bool Lua::operator()(std::string& dotlua) { return !run(dotlua); }
 bool Lua::operator()(const char* dotlua) { return !run(dotlua); }
 
 Lua& Lua::operator<<(null_t)                { lua_pushnil(L); return *this; }

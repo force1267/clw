@@ -85,6 +85,7 @@ private:
         friend class Function;
     };
 
+    int run(std::string& dotlua);
     int run(const char* dotlua);
 
 public:
@@ -146,6 +147,7 @@ public:
     Lua(const char * dotlua);
     ~Lua();
 
+    bool operator()(std::string& dotlua);
     bool operator()(const char* dotlua);
     Lua& operator<<(null_t);
     Lua& operator<<(bool);
