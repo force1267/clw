@@ -105,6 +105,7 @@ public:
         class call {
             int retc;
             public:
+            call();
             call(int retc);
             friend class Function;
         };

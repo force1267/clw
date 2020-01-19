@@ -79,7 +79,8 @@ Lua& Lua::Function::function_style_call::operator>(int retc) const {
     return *fn.instance;
 }
 
-Lua::Function::call::call(int retc = 0): retc(retc) {}
+Lua::Function::call::call(): retc(0) {}
+Lua::Function::call::call(int retc): retc(retc) {}
 
 Lua::Function::Function(): instance(null), argc(0) {}
 Lua::Function::Function(const Lua::Function& fn): instance(fn.instance), argc(0) {}
