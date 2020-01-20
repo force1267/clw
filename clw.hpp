@@ -22,6 +22,20 @@ class Lua {
 public:
     typedef lua_State* vm;
     typedef int(*CFunction)(Lua::vm);
+    
+    class types {
+        Lua& instance;
+        public:
+        types(Lua&);
+        static unsigned char nil;
+        static unsigned char boolean;
+        static unsigned char number;
+        static unsigned char string;
+        static unsigned char function;
+        void assert(unsigned char t) const;
+    };
+    const types& type;
+    
 private:
     vm L;
     bool owner;

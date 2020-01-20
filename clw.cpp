@@ -2,6 +2,18 @@
 #include <string>
 
 
+Lua::types::types(Lua& instance): instance(instance) {}
+unsigned char Lua::types::nil = LUA_TNIL;
+unsigned char Lua::types::boolean = LUA_TBOOLEAN;
+unsigned char Lua::types::number = LUA_TNUMBER;
+unsigned char Lua::types::string = LUA_TSTRING;
+unsigned char Lua::types::function = LUA_TFUNCTION;
+void Lua::types::assert(unsigned char t) const {
+    if(!lua_type(instance.L, -1) == t) {
+        throw "Lua-C++ Type conflict";
+    }
+}
+
 Lua::strict_mode_t::strict_mode_t(const Lua::strict_mode_t& strict): instance(strict.instance) {}
 Lua::strict_mode_t::strict_mode_t(Lua& instance): instance(instance) {}
 
@@ -117,11 +129,11 @@ Lua::Function& Lua::Function::operator<<(Lua::CFunction& v)    { check; *instanc
 
 Lua::Function::function_style_call Lua::Function::operator()(void) { return Lua::Function::function_style_call(*this); }
 
-Lua::Lua(): L(luaL_newstate()), owner(true) {
+Lua::Lua(): L(luaL_newstate()), owner(true), type(types(*this)) {
     luaL_openlibs(L);
 }
-Lua::Lua(const Lua& lua): L(lua.L), owner(false) {}
-Lua::Lua(Lua::vm L): L(L), owner(false) {
+Lua::Lua(const Lua& lua): L(lua.L), owner(false), type(types(*this)) {}
+Lua::Lua(Lua::vm L): L(L), owner(false), type(types(*this)) {
     luaL_openlibs(L);
 }
 Lua::Lua(const char * dotlua): Lua() {
